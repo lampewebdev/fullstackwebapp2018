@@ -1,0 +1,21 @@
+version: '3.5'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+      args:
+        PACKAGE_PATH: ./frontend
+        WORKING_DIR: /src/frontend
+    expose:
+      - 3000
+    ports:
+      - 3000:3000
+    environment:
+      - REACT_APP_ENV=development
+      - HTTPS=true
+      - NODE_PATH=/src/frontend/src
+    volumes:
+      - .:/src
+    command: ["npm", "start"]
