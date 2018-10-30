@@ -2,11 +2,12 @@ FROM node:8.12.0
 
 ARG PACKAGE_PATH=
 ARG WORKING_DIR=/src
+ARG PARENT_DIR=./
 
 WORKDIR $WORKING_DIR
-
+RUN echo "Build number: $PACKAGE_PATH"
 COPY $PACKAGE_PATH/package.json $WORKING_DIR/package.json
-COPY $PACKAGE_PATH/yarn.lock $WORKING_DIR/yarn.lock
+COPY $PARENT_DIR/yarn.lock $WORKING_DIR/yarn.lock
 RUN npm install
 
 COPY . /src
